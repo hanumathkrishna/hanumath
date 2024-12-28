@@ -1,108 +1,203 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hanumath Krishna - DevOps Engineer</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .header {
-            text-align: center;
-            padding: 40px 0;
-            background-color: #f5f5f5;
-        }
-        .project-card {
-            border: 1px solid #ddd;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
-        .skills-section {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 20px 0;
-        }
-        .skill-tag {
-            background-color: #e9ecef;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 14px;
-        }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <h1>Hanumath Krishna</h1>
-        <p>DevOps Engineer</p>
-        <p>📍 Hyderabad | 📧 ghanumath16@gmail.com</p>
+import React, { useState, useEffect } from 'react';
+import { 
+  Code2, 
+  ArrowUpRight, 
+  Github, 
+  Linkedin, 
+  Mail,
+  Server,
+  Database
+} from 'lucide-react';
+
+const AnimatedPortfolio = () => {
+  const [isVisible, setIsVisible] = useState({});
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsVisible(prev => ({
+            ...prev,
+            [entry.target.id]: entry.isIntersecting
+          }));
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll('section').forEach((section) => {
+      observer.observe(section);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const projects = [
+    {
+      title: "Real-time Data Streaming Pipeline",
+      description: "Implemented CDC solution using Confluent Kafka for real-time data streaming",
+      achievements: ["70% reduction in analytics loading time", "Near real-time dashboard updates"],
+      tech: ["Kafka", "PostgreSQL", "MySQL", "Redshift"]
+    },
+    {
+      title: "AWS Infrastructure Migration",
+      description: "Led serverless to ECS migration improving application performance",
+      achievements: ["80% response time improvement", "99.9% uptime achieved"],
+      tech: ["AWS ECS", "Terraform", "Docker", "CloudWatch"]
+    },
+    {
+      title: "ETL Integration Platform",
+      description: "Evaluated and implemented multi-source ETL solutions",
+      achievements: ["Integrated multiple data sources", "Optimized data workflows"],
+      tech: ["HEVO", "REST APIs", "Mailchimp", "Mixpanel"]
+    }
+  ];
+
+  const skills = {
+    "Cloud & Infrastructure": ["AWS EC2", "ECS", "S3", "RDS", "RedShift", "VPC"],
+    "DevOps Tools": ["Terraform", "Docker", "Kubernetes", "Jenkins", "GitHub Actions"],
+    "Data & Integration": ["Confluent Kafka", "HEVO", "Fivetran", "Airbyte"],
+    "Monitoring": ["CloudWatch", "Prometheus", "Grafana"]
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+      {/* Hero Section */}
+      <section id="hero" className="min-h-screen flex items-center justify-center text-center p-8">
+        <div className={`transform transition-all duration-1000 ${isVisible['hero'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <Code2 className="w-16 h-16 mx-auto mb-8 text-blue-400" />
+          <h1 className="text-5xl font-bold mb-4">Hanumath Krishna</h1>
+          <h2 className="text-2xl text-blue-400 mb-8">DevOps Engineer</h2>
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+            Specializing in cloud infrastructure and data pipeline optimization with a focus on AWS and modern DevOps practices.
+          </p>
+          <div className="flex justify-center gap-6 mt-8">
+            <a href="https://github.com" className="hover:text-blue-400 transition-colors">
+              <Github className="w-8 h-8" />
+            </a>
+            <a href="https://linkedin.com" className="hover:text-blue-400 transition-colors">
+              <Linkedin className="w-8 h-8" />
+            </a>
+            <a href="mailto:ghanumath16@gmail.com" className="hover:text-blue-400 transition-colors">
+              <Mail className="w-8 h-8" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="py-20 px-8">
+        <h2 className="text-4xl font-bold text-center mb-16">Featured Projects</h2>
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project, index) => (
+            <div 
+              key={index}
+              className={`bg-gray-800 rounded-lg p-6 transform transition-all duration-700 hover:scale-105 ${
+                isVisible['projects'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+              }`}
+              style={{ transitionDelay: `${index * 200}ms` }}
+            >
+              <h3 className="text-xl font-bold mb-4 flex items-center justify-between">
+                {project.title}
+                <ArrowUpRight className="w-5 h-5 text-blue-400" />
+              </h3>
+              <p className="text-gray-400 mb-4">{project.description}</p>
+              <ul className="mb-4 text-sm text-gray-300">
+                {project.achievements.map((achievement, i) => (
+                  <li key={i} className="mb-2">• {achievement}</li>
+                ))}
+              </ul>
+              <div className="flex flex-wrap gap-2">
+                {project.tech.map((tech, i) => (
+                  <span key={i} className="text-xs bg-blue-900 text-blue-200 px-3 py-1 rounded-full">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section id="skills" className="py-20 px-8 bg-gray-800 bg-opacity-50">
+        <h2 className="text-4xl font-bold text-center mb-16">Technical Skills</h2>
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+          {Object.entries(skills).map(([category, items], index) => (
+            <div 
+              key={category}
+              className={`transform transition-all duration-700 ${
+                isVisible['skills'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+              }`}
+              style={{ transitionDelay: `${index * 200}ms` }}
+            >
+              <div className="flex items-center gap-2 mb-4">
+                {category.includes('Cloud') ? (
+                  <Server className="w-6 h-6 text-blue-400" />
+                ) : (
+                  <Database className="w-6 h-6 text-blue-400" />
+                )}
+                <h3 className="text-xl font-bold text-blue-400">{category}</h3>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                {items.map((skill, i) => (
+                  <span 
+                    key={i}
+                    className="bg-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-blue-900 transition-colors"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Experience Section */}
+      <section id="experience" className="py-20 px-8">
+        <h2 className="text-4xl font-bold text-center mb-16">Work Experience</h2>
+        <div className="max-w-3xl mx-auto">
+          <div 
+            className={`bg-gray-800 rounded-lg p-8 transform transition-all duration-700 ${
+              isVisible['experience'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+            }`}
+          >
+            <div className="flex justify-between items-start mb-4">
+              <div>
+                <h3 className="text-xl font-bold">DevOps Engineer</h3>
+                <p className="text-blue-400">Tericsoft Technology Solutions</p>
+              </div>
+              <p className="text-gray-400">Mar 2023 - Present</p>
+            </div>
+            <ul className="text-gray-300 space-y-3">
+              <li>• Pioneered CDC solution using Confluent Kafka</li>
+              <li>• Streamlined AWS infrastructure with Terraform</li>
+              <li>• Led serverless to ECS migration</li>
+              <li>• Implemented comprehensive monitoring solutions</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-20 px-8 bg-gray-800 bg-opacity-50">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-4xl font-bold mb-8">Let's Connect</h2>
+          <p className="text-gray-300 mb-8">
+            Looking for opportunities to collaborate on challenging DevOps projects.
+          </p>
+          <a 
+            href="mailto:ghanumath16@gmail.com"
+            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg transition-colors"
+          >
+            <Mail className="w-5 h-5" />
+            Get in Touch
+          </a>
+        </div>
+      </section>
     </div>
+  );
+};
 
-    <div class="container">
-        <section id="about">
-            <h2>About Me</h2>
-            <p>DevOps Engineer with expertise in cloud infrastructure and data pipeline optimization. Experienced in AWS services, containerization, and implementing scalable solutions.</p>
-        </section>
-
-        <section id="skills">
-            <h2>Technical Skills</h2>
-            <div class="skills-section">
-                <span class="skill-tag">AWS (EC2, ECS, S3, RDS, RedShift)</span>
-                <span class="skill-tag">Terraform</span>
-                <span class="skill-tag">Docker</span>
-                <span class="skill-tag">Kubernetes</span>
-                <span class="skill-tag">GitHub Actions</span>
-                <span class="skill-tag">Jenkins</span>
-                <span class="skill-tag">Confluent Kafka</span>
-                <span class="skill-tag">CloudWatch</span>
-            </div>
-        </section>
-
-        <section id="projects">
-            <h2>Key Projects</h2>
-            
-            <div class="project-card">
-                <h3>Real-time Data Streaming Solution</h3>
-                <p>Implemented CDC solution using Confluent Kafka for real-time data streaming from Postgres and MySQL to Redshift.</p>
-                <ul>
-                    <li>Reduced analytics loading time by 70%</li>
-                    <li>Enabled real-time dashboard updates</li>
-                </ul>
-            </div>
-
-            <div class="project-card">
-                <h3>AWS Infrastructure Optimization</h3>
-                <p>Led serverless to ECS migration project improving application performance significantly.</p>
-                <ul>
-                    <li>Reduced response time from 100ms to under 20ms</li>
-                    <li>Achieved 99.9% uptime</li>
-                    <li>Implemented Infrastructure as Code using Terraform</li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="experience">
-            <h2>Professional Experience</h2>
-            <div class="project-card">
-                <h3>DevOps Engineer | Tericsoft Technology Solutions</h3>
-                <p>Mar 2023 - Present</p>
-                <ul>
-                    <li>Lead cloud infrastructure management and optimization</li>
-                    <li>Implement and maintain data pipelines</li>
-                    <li>Manage monitoring and alerting systems</li>
-                </ul>
-            </div>
-        </section>
-    </div>
-</body>
-</html>
+export default AnimatedPortfolio;
