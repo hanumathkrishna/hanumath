@@ -1,203 +1,333 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Code2, 
-  ArrowUpRight, 
-  Github, 
-  Linkedin, 
-  Mail,
-  Server,
-  Database
-} from 'lucide-react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hanumath Krishna - DevOps Engineer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
 
-const AnimatedPortfolio = () => {
-  const [isVisible, setIsVisible] = useState({});
+        body {
+            background: linear-gradient(to bottom, #1a1a2e, #16213e);
+            color: white;
+            line-height: 1.6;
+        }
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          setIsVisible(prev => ({
-            ...prev,
-            [entry.target.id]: entry.isIntersecting
-          }));
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .hero h2 {
+            font-size: 1.8rem;
+            color: #60a5fa;
+            margin-bottom: 2rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #fff;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 0 1rem;
+        }
+
+        .project-card {
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .project-card p {
+            color: #94a3b8;
+            margin-bottom: 1rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            background: #1e40af;
+            color: #bfdbfe;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 5rem 0;
+            background: rgba(30, 41, 59, 0.3);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category h3 {
+            color: #60a5fa;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(30, 41, 59, 0.8);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: #1e40af;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #60a5fa;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero h2 { font-size: 1.5rem; }
+            .section-title { font-size: 2rem; }
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <i data-feather="code" style="width: 64px; height: 64px; color: #60a5fa; margin-bottom: 2rem;"></i>
+            <h1>Hanumath Krishna</h1>
+            <h2>DevOps Engineer</h2>
+            <p>Specializing in cloud infrastructure and data pipeline optimization with a focus on AWS and modern DevOps practices.</p>
+            <div class="social-links">
+                <a href="https://github.com"><i data-feather="github"></i></a>
+                <a href="https://linkedin.com"><i data-feather="linkedin"></i></a>
+                <a href="mailto:ghanumath16@gmail.com"><i data-feather="mail"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card animate-on-scroll">
+                    <h3>Real-time Data Streaming Pipeline</h3>
+                    <p>Implemented CDC solution using Confluent Kafka for real-time data streaming</p>
+                    <ul style="color: #94a3b8; margin-bottom: 1rem; padding-left: 1.5rem;">
+                        <li>70% reduction in analytics loading time</li>
+                        <li>Near real-time dashboard updates</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Kafka</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">Redshift</span>
+                    </div>
+                </div>
+                
+                <div class="project-card animate-on-scroll">
+                    <h3>AWS Infrastructure Migration</h3>
+                    <p>Led serverless to ECS migration improving application performance</p>
+                    <ul style="color: #94a3b8; margin-bottom: 1rem; padding-left: 1.5rem;">
+                        <li>80% response time improvement</li>
+                        <li>99.9% uptime achieved</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span class="tech-tag">AWS ECS</span>
+                        <span class="tech-tag">Terraform</span>
+                        <span class="tech-tag">Docker</span>
+                    </div>
+                </div>
+
+                <div class="project-card animate-on-scroll">
+                    <h3>ETL Integration Platform</h3>
+                    <p>Evaluated and implemented multi-source ETL solutions</p>
+                    <ul style="color: #94a3b8; margin-bottom: 1rem; padding-left: 1.5rem;">
+                        <li>Integrated multiple data sources</li>
+                        <li>Optimized data workflows</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span class="tech-tag">HEVO</span>
+                        <span class="tech-tag">REST APIs</span>
+                        <span class="tech-tag">Mailchimp</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category animate-on-scroll">
+                    <h3><i data-feather="cloud"></i> Cloud & Infrastructure</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">AWS EC2</span>
+                        <span class="skill-tag">ECS</span>
+                        <span class="skill-tag">S3</span>
+                        <span class="skill-tag">RDS</span>
+                        <span class="skill-tag">RedShift</span>
+                    </div>
+                </div>
+
+                <div class="skill-category animate-on-scroll">
+                    <h3><i data-feather="settings"></i> DevOps Tools</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Terraform</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">Jenkins</span>
+                    </div>
+                </div>
+
+                <div class="skill-category animate-on-scroll">
+                    <h3><i data-feather="database"></i> Data & Integration</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Confluent Kafka</span>
+                        <span class="skill-tag">HEVO</span>
+                        <span class="skill-tag">Fivetran</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <h2 class="section-title">Let's Connect</h2>
+            <p style="color: #94a3b8; margin-bottom: 2rem;">Looking for opportunities to collaborate on challenging DevOps projects.</p>
+            <a href="mailto:ghanumath16@gmail.com" style="background: #2563eb; color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+                <i data-feather="mail"></i>
+                Get in Touch
+            </a>
+        </div>
+    </section>
+
+    <script>
+        // Initialize Feather Icons
+        feather.replace();
+
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate-on-scroll').forEach((element) => {
+            observer.observe(element);
         });
-      },
-      { threshold: 0.1 }
-    );
-
-    document.querySelectorAll('section').forEach((section) => {
-      observer.observe(section);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  const projects = [
-    {
-      title: "Real-time Data Streaming Pipeline",
-      description: "Implemented CDC solution using Confluent Kafka for real-time data streaming",
-      achievements: ["70% reduction in analytics loading time", "Near real-time dashboard updates"],
-      tech: ["Kafka", "PostgreSQL", "MySQL", "Redshift"]
-    },
-    {
-      title: "AWS Infrastructure Migration",
-      description: "Led serverless to ECS migration improving application performance",
-      achievements: ["80% response time improvement", "99.9% uptime achieved"],
-      tech: ["AWS ECS", "Terraform", "Docker", "CloudWatch"]
-    },
-    {
-      title: "ETL Integration Platform",
-      description: "Evaluated and implemented multi-source ETL solutions",
-      achievements: ["Integrated multiple data sources", "Optimized data workflows"],
-      tech: ["HEVO", "REST APIs", "Mailchimp", "Mixpanel"]
-    }
-  ];
-
-  const skills = {
-    "Cloud & Infrastructure": ["AWS EC2", "ECS", "S3", "RDS", "RedShift", "VPC"],
-    "DevOps Tools": ["Terraform", "Docker", "Kubernetes", "Jenkins", "GitHub Actions"],
-    "Data & Integration": ["Confluent Kafka", "HEVO", "Fivetran", "Airbyte"],
-    "Monitoring": ["CloudWatch", "Prometheus", "Grafana"]
-  };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
-      {/* Hero Section */}
-      <section id="hero" className="min-h-screen flex items-center justify-center text-center p-8">
-        <div className={`transform transition-all duration-1000 ${isVisible['hero'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <Code2 className="w-16 h-16 mx-auto mb-8 text-blue-400" />
-          <h1 className="text-5xl font-bold mb-4">Hanumath Krishna</h1>
-          <h2 className="text-2xl text-blue-400 mb-8">DevOps Engineer</h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Specializing in cloud infrastructure and data pipeline optimization with a focus on AWS and modern DevOps practices.
-          </p>
-          <div className="flex justify-center gap-6 mt-8">
-            <a href="https://github.com" className="hover:text-blue-400 transition-colors">
-              <Github className="w-8 h-8" />
-            </a>
-            <a href="https://linkedin.com" className="hover:text-blue-400 transition-colors">
-              <Linkedin className="w-8 h-8" />
-            </a>
-            <a href="mailto:ghanumath16@gmail.com" className="hover:text-blue-400 transition-colors">
-              <Mail className="w-8 h-8" />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section id="projects" className="py-20 px-8">
-        <h2 className="text-4xl font-bold text-center mb-16">Featured Projects</h2>
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <div 
-              key={index}
-              className={`bg-gray-800 rounded-lg p-6 transform transition-all duration-700 hover:scale-105 ${
-                isVisible['projects'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-              }`}
-              style={{ transitionDelay: `${index * 200}ms` }}
-            >
-              <h3 className="text-xl font-bold mb-4 flex items-center justify-between">
-                {project.title}
-                <ArrowUpRight className="w-5 h-5 text-blue-400" />
-              </h3>
-              <p className="text-gray-400 mb-4">{project.description}</p>
-              <ul className="mb-4 text-sm text-gray-300">
-                {project.achievements.map((achievement, i) => (
-                  <li key={i} className="mb-2">• {achievement}</li>
-                ))}
-              </ul>
-              <div className="flex flex-wrap gap-2">
-                {project.tech.map((tech, i) => (
-                  <span key={i} className="text-xs bg-blue-900 text-blue-200 px-3 py-1 rounded-full">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section id="skills" className="py-20 px-8 bg-gray-800 bg-opacity-50">
-        <h2 className="text-4xl font-bold text-center mb-16">Technical Skills</h2>
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-          {Object.entries(skills).map(([category, items], index) => (
-            <div 
-              key={category}
-              className={`transform transition-all duration-700 ${
-                isVisible['skills'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-              }`}
-              style={{ transitionDelay: `${index * 200}ms` }}
-            >
-              <div className="flex items-center gap-2 mb-4">
-                {category.includes('Cloud') ? (
-                  <Server className="w-6 h-6 text-blue-400" />
-                ) : (
-                  <Database className="w-6 h-6 text-blue-400" />
-                )}
-                <h3 className="text-xl font-bold text-blue-400">{category}</h3>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                {items.map((skill, i) => (
-                  <span 
-                    key={i}
-                    className="bg-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-blue-900 transition-colors"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Experience Section */}
-      <section id="experience" className="py-20 px-8">
-        <h2 className="text-4xl font-bold text-center mb-16">Work Experience</h2>
-        <div className="max-w-3xl mx-auto">
-          <div 
-            className={`bg-gray-800 rounded-lg p-8 transform transition-all duration-700 ${
-              isVisible['experience'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-            }`}
-          >
-            <div className="flex justify-between items-start mb-4">
-              <div>
-                <h3 className="text-xl font-bold">DevOps Engineer</h3>
-                <p className="text-blue-400">Tericsoft Technology Solutions</p>
-              </div>
-              <p className="text-gray-400">Mar 2023 - Present</p>
-            </div>
-            <ul className="text-gray-300 space-y-3">
-              <li>• Pioneered CDC solution using Confluent Kafka</li>
-              <li>• Streamlined AWS infrastructure with Terraform</li>
-              <li>• Led serverless to ECS migration</li>
-              <li>• Implemented comprehensive monitoring solutions</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="py-20 px-8 bg-gray-800 bg-opacity-50">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-8">Let's Connect</h2>
-          <p className="text-gray-300 mb-8">
-            Looking for opportunities to collaborate on challenging DevOps projects.
-          </p>
-          <a 
-            href="mailto:ghanumath16@gmail.com"
-            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg transition-colors"
-          >
-            <Mail className="w-5 h-5" />
-            Get in Touch
-          </a>
-        </div>
-      </section>
-    </div>
-  );
-};
-
-export default AnimatedPortfolio;
+    </script>
+</body>
+</html>
